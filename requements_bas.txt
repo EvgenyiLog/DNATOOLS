@@ -1,0 +1,7 @@
+numpy
+scipy
+pandas
+prettytable
+colorama
+XlsxWriter
+gemmi
