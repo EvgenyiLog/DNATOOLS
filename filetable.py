@@ -37,9 +37,9 @@ def readerbcl(f):
 def cifreader(f):
     'cif reader'
     if os.path.splitext(f)[1]==".cif":
-            inten=1*np.random.random(1)
-            
-    return inten
+        inten=np.random.random(1)
+        print(inten)
+        return inten
 
 
 
