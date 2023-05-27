@@ -43,15 +43,18 @@ def cifreader(f):
 
 
 
-
+import warnings
+import csv
 def main():
+    warnings.simplefilter("ignore")
+    warnings.filterwarnings("default", category=FutureWarning)
     'source_dir path sourse'
     #source__dir = "F:/Program Files/Sar/pythondif/s_1_1101.locs"
     #source__dir=os.path.abspath("C:/files/")
     source__dir="C:/Users/evgen/Downloads/DNATOOOLS/files/"
     #print(source__dir)
     #pathsave="F:/Program Files/Sar/pythondif/result.xlsx"
-    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result.csv")
+    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.csv")
     #print(os.path.isdir(source__dir))
     if not os.path.isdir(source__dir) == True:
         raise FileNotFoundError('{} does not exists.'.format(source__dir))
@@ -130,17 +133,17 @@ def main():
     print(x)
     
                 
-    #data={'number':number,'xcentr':xcentrall,'ycentr':ycentr,'a':ainten,'g':ginten,'c':cinten,'t':tinten,'quality':quality}
-    #df = pd.DataFrame(data=data)
-    #print(df)
+    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity}
+    df = pd.DataFrame(data=data)
+    print(df)
     
-
-    #writer = pd.ExcelWriter('result.xlsx', engine='xlsxwriter')
-    #df.to_excel(writer, sheet_name='Sheet1')
-    #writer.close()
+    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.xlsx")
+    writer = pd.ExcelWriter(pathsave, engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Sheet1')
+    writer.close()
 
     #df.to_excel(pathsave, index=False ,encoding='utf-8', engine='xlsxwriter')
-    #df.to_csv(pathsave, index=False ,encoding='utf-8')
+    df.to_csv(pathsave, index=False,encoding='utf-8')
     print("writing complete")
     
 if __name__ == "__main__":
