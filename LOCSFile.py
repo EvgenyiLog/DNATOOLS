@@ -27,10 +27,13 @@ class LOCSFile(BinaryFile):
         return ((version_num, magic_num, n_reads),)
 
     def read_record_locs(self, skip_header=True):
+        X,Y=[],[]
         for record in self.read_record(skip_header=skip_header):
             x,y = record
+            X.append(x)
+            Y.append(y)
 
-            yield (x,y)
+        yield (X,Y)
 
     def write_header_locs(self, n_reads):
         header_values = (self.version_num, self.magic_num, n_reads)

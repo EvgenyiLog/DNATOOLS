@@ -47,7 +47,7 @@ class BCLFile(BinaryFile):
             num = r >> 2
             qual = num2qual(num)
 
-            yield (base,qual)
+            yield (base,ord(qual))
 
     def write_header_bcl(self, n_reads):
         header_values = (n_reads,)

@@ -30,7 +30,7 @@ def readerbcl(f):
         file=BCLFile(f)
         x=file.read_record_bcl()
         base,qual=next(x)
-        #print(base)
+        print(base)
         print(qual)
         return base,qual
 
@@ -66,6 +66,7 @@ def main():
     cinten=[]
     ginten=[]
     tinten=[]
+    quantity=[]
 
     for (dirpath, dirnames, filename) in os.walk(source__dir):
         #print(dirnames)
@@ -78,48 +79,61 @@ def main():
                 name,extension=os.path.splitext(filename)
                 xcentr,ycentr=locsreader(filename)
                 print()
-                print(xcentr)
-                print(ycentr)
+                print(max(xcentr))
+                print(min(xcentr))
+                print(max(ycentr))
+                print(min(ycentr))
                 print()
                 xcentrall.append(np.asarray(xcentr))
                 ycentrall.append(np.asarray(ycentr))
+                xcentr=np.asarray(xcentr)
+                ycentr=np.asarray(ycentr)
+                print(xcentr.shape)
+                print(ycentr.shape)
+                quantity.append(xcentr.shape[0])
             
             if filename.endswith(".bcl"):
                 base,qual=readerbcl(filename)
                 quality.append(qual)
            
-            number.append(i)
+            
             if filename.split("_")[0]=='a' and  filename.endswith(".cif"):
-                i=+1
                 inten=cifreader(filename)
                 ainten.append(inten.sum())
+                
             if filename.split("_")[0]=='g' and  filename.endswith(".cif"):
                 inten=cifreader(filename)
                 ginten.append(inten.sum())
+               
             if filename.split("_")[0]=='t' and  filename.endswith(".cif"):
                 inten=cifreader(filename)
                 tinten.append(inten.sum())
+                
             if filename.split("_")[0]=='s' and  filename.endswith(".cif"):
                 inten=cifreader(filename)
                 cinten.append(inten.sum())
-    '''''            
+                
+    number=np.arange(1,len(xcentrall)+1)
+    print(number)
+              
     x=PrettyTable()
     x.add_column('number',number)
     x.add_column('xcentr',xcentrall)
     x.add_column('ycentr',ycentrall)
-    x.add_column('a',ainten)
-    x.add_column('g',ginten)
-    x.add_column('ы',cinten)
-    x.add_column('t',tinten)
+    #x.add_column('a',ainten)
+    #x.add_column('g',ginten)
+    #x.add_column('ы',cinten)
+    #x.add_column('t',tinten)
+    x.add_column('quantity',quantity)
     x.add_column('quality',quality)
     x.align = "c"
     print(x)
     
                 
-    data={'number':number,'xcentr':xcentrall,'ycentr':ycentr,'a':ainten,'g':ginten,'c':cinten,'t':tinten,'quality':quality}
-    df = pd.DataFrame(data=data)
-    print(df)
-    '''
+    #data={'number':number,'xcentr':xcentrall,'ycentr':ycentr,'a':ainten,'g':ginten,'c':cinten,'t':tinten,'quality':quality}
+    #df = pd.DataFrame(data=data)
+    #print(df)
+    
 
     #writer = pd.ExcelWriter('result.xlsx', engine='xlsxwriter')
     #df.to_excel(writer, sheet_name='Sheet1')
