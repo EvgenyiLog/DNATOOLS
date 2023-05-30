@@ -70,6 +70,7 @@ def main():
     ginten=[]
     tinten=[]
     quantity=[]
+    basef=[]
 
     for (dirpath, dirnames, filename) in os.walk(source__dir):
         #print(dirnames)
@@ -97,7 +98,8 @@ def main():
             
             if filename.endswith(".bcl"):
                 base,qual=readerbcl(filename)
-                quality.append(qual)
+                quality.append(np.asarray(qual))
+                basef.append(np.asarray(base))
            
             
             if filename.split("_")[0]=='a' and  filename.endswith(".cif"):
@@ -129,11 +131,12 @@ def main():
     #x.add_column('t',tinten)
     x.add_column('quantity',quantity)
     x.add_column('quality',quality)
+    x.add_column('base',basef)
     x.align = "c"
     print(x)
     
                 
-    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity}
+    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef}
     df = pd.DataFrame(data=data)
     print(df)
     

@@ -40,14 +40,17 @@ class BCLFile(BinaryFile):
         #               | ‘0’ in a byte is reserved
         #               | for no-call.
         """
+        QUAL,BASE=[],[]
         for record in self.read_record(skip_header=skip_header):
             r, = record
 
             base = num2base.get(3 & r, 0)
             num = r >> 2
             qual = num2qual(num)
+            QUAL.append(ord(qual))
+            BASE.append(base)
 
-            yield (base,ord(qual))
+        yield (BASE,QUAL)
 
     def write_header_bcl(self, n_reads):
         header_values = (n_reads,)
