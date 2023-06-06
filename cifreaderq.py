@@ -5,7 +5,13 @@ import ctypes
 
 def cifreader(f):
     if os.path.splitext(f)[1]==".cif":
-        cluster_count=np.fromfile(f,count=9,offset=12,dtype=ctypes.c_ulong)#ctypes.c_uint
+        cluster_count=np.fromfile(f,count=-1,offset=9,dtype=ctypes.c_ulong)#ctypes.c_uint
         print(cluster_count)
         print()
-        unknow=np.fromfile(f,count=12,offset=-1,dtype=ctypes.c_uint)#dtype,format?#['base':[cluster_count*intensitivy]] or [[cluster_count*intensitivy],...,[cluster_count*intensitivy]]
+        
+        
+        
+
+
+if __name__ == '__main__':
+    cifreader("C:/Users/Евгений/Downloads/s_1_1101.cif")
