@@ -10,6 +10,8 @@ from LOCSFile import LOCSFile
 from BCLFile   import BCLFile
 import os.path
 import gemmi
+from cifreaderq import cifreader
+#import picard
 
 
 def locsreader(f):
@@ -18,8 +20,8 @@ def locsreader(f):
         file=LOCSFile(f)
         z=file.read_record_locs()
         x,y=next(z)
-        print(x)
-        print(y)
+        #print(x)
+        #print(y)
         return x,y
 
 
@@ -30,16 +32,11 @@ def readerbcl(f):
         file=BCLFile(f)
         x=file.read_record_bcl()
         base,qual=next(x)
-        print(base)
-        print(qual)
+        #print(base)
+        #print(qual)
         return base,qual
 
-def cifreader(f):
-    'cif reader'
-    if os.path.splitext(f)[1]==".cif":
-        inten=np.random.random(1)
-        print(inten)
-        return inten
+
 
 
 
@@ -83,17 +80,17 @@ def main():
                 name,extension=os.path.splitext(filename)
                 xcentr,ycentr=locsreader(filename)
                 print()
-                print(max(xcentr))
-                print(min(xcentr))
-                print(max(ycentr))
-                print(min(ycentr))
+                #print(max(xcentr))
+                #print(min(xcentr))
+                #print(max(ycentr))
+                #(min(ycentr))
                 print()
                 xcentrall.append(np.asarray(xcentr))
                 ycentrall.append(np.asarray(ycentr))
                 xcentr=np.asarray(xcentr)
                 ycentr=np.asarray(ycentr)
-                print(xcentr.shape)
-                print(ycentr.shape)
+                #print(xcentr.shape)
+                #print(ycentr.shape)
                 quantity.append(xcentr.shape[0])
             
             if filename.endswith(".bcl"):
@@ -102,33 +99,26 @@ def main():
                 basef.append(np.asarray(base))
            
             
-            if filename.split("_")[0]=='a' and  filename.endswith(".cif"):
-                inten=cifreader(filename)
-                ainten.append(inten.sum())
+            if filename.endswith(".cif"):
+                intenA,intenC,intenT,intenG,k=cifreader(filename)
+                #print(intenA.shape)
+                ainten.append(intenA)
+                cinten.append(intenC)
+                tinten.append(intenT)
+                ginten.append(intenG)
                 
-            if filename.split("_")[0]=='g' and  filename.endswith(".cif"):
-                inten=cifreader(filename)
-                ginten.append(inten.sum())
-               
-            if filename.split("_")[0]=='t' and  filename.endswith(".cif"):
-                inten=cifreader(filename)
-                tinten.append(inten.sum())
-                
-            if filename.split("_")[0]=='s' and  filename.endswith(".cif"):
-                inten=cifreader(filename)
-                cinten.append(inten.sum())
                 
     number=np.arange(1,len(xcentrall)+1)
-    print(number)
+    #print(number)
               
     x=PrettyTable()
     x.add_column('number',number)
     x.add_column('xcentr',xcentrall)
     x.add_column('ycentr',ycentrall)
-    #x.add_column('a',ainten)
-    #x.add_column('g',ginten)
-    #x.add_column('ы',cinten)
-    #x.add_column('t',tinten)
+    x.add_column('A',ainten)
+    x.add_column('G',ginten)
+    x.add_column('C',cinten)
+    x.add_column('T',tinten)
     x.add_column('quantity',quantity)
     x.add_column('quality',quality)
     x.add_column('base',basef)
@@ -136,7 +126,7 @@ def main():
     print(x)
     
                 
-    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef}
+    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
     df = pd.DataFrame(data=data)
     print(df)
     
@@ -146,6 +136,7 @@ def main():
     writer.close()
 
     #df.to_excel(pathsave, index=False ,encoding='utf-8', engine='xlsxwriter')
+    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.csv")
     df.to_csv(pathsave, index=False,encoding='utf-8')
     print("writing complete")
     
