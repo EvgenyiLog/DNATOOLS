@@ -5,6 +5,7 @@ import pandas  as pd
 from prettytable import PrettyTable
 from colorama import init, Fore, Back, Style 
 #import xlsxWriter 
+import cv2
 
 from LOCSFile import LOCSFile
 from BCLFile   import BCLFile
@@ -12,6 +13,7 @@ import os.path
 import gemmi
 from cifreaderq import cifreader
 #import picard
+
 
 
 def locsreader(f):
@@ -22,6 +24,16 @@ def locsreader(f):
         x,y=next(z)
         #print(x)
         #print(y)
+        image=np.zeros((2866, 2944,3))
+        image=np.asarray(image,dtype=np.uint8)
+        k=len(x)
+        for i in range(k):
+            #print(x[i])
+            image1=cv2.circle(image, (int(x[i]), int(y[i])), 1, (255, 255, 255), -1)
+        cv2.imwrite("C:/Users/evgen/Downloads/DNATOOOLS/result/result_bcl.jpg",image1)
+
+        
+
         return x,y
 
 
@@ -51,15 +63,6 @@ def main():
     source__dir="C:/Users/evgen/Downloads/DNATOOOLS/files/"
     #print(source__dir)
     #pathsave="F:/Program Files/Sar/pythondif/result.xlsx"
-    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.csv")
-    #print(os.path.isdir(source__dir))
-    if not os.path.isdir(source__dir) == True:
-        raise FileNotFoundError('{} does not exists.'.format(source__dir))
-    
-    i=0
-
-    xcentrall=[]
-    ycentrall=[]
     quality=[]
     number=[]
     ainten=[]
@@ -68,6 +71,9 @@ def main():
     tinten=[]
     quantity=[]
     basef=[]
+    ycentrall=[]
+    xcentrall=[]
+
 
     for (dirpath, dirnames, filename) in os.walk(source__dir):
         #print(dirnames)
