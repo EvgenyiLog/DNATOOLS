@@ -91,27 +91,27 @@ def main():
                 #print(max(ycentr))
                 #(min(ycentr))
                 print()
-                xcentrall.append(np.asarray(xcentr))
-                ycentrall.append(np.asarray(ycentr))
+                xcentrall.append(np.asarray(xcentr,dtype=float))
+                ycentrall.append(np.asarray(ycentr,dtype=float))
                 xcentr=np.asarray(xcentr)
                 ycentr=np.asarray(ycentr)
                 #print(xcentr.shape)
                 #print(ycentr.shape)
-                quantity.append(xcentr.shape[0])
+                quantity.append(np.asarray(xcentr.shape[0],dtype=int))
             
             if filename.endswith(".bcl"):
                 base,qual=readerbcl(filename)
-                quality.append(np.asarray(qual))
+                quality.append(np.asarray(qual,dtype=float))
                 basef.append(np.asarray(base))
            
             
             if filename.endswith(".cif"):
                 intenA,intenC,intenT,intenG,k=cifreader(filename)
                 #print(intenA.shape)
-                ainten.append(intenA)
-                cinten.append(intenC)
-                tinten.append(intenT)
-                ginten.append(intenG)
+                ainten.append(np.asarray(intenA,dtype=float))
+                cinten.append(np.asarray(intenC,dtype=float))
+                tinten.append(np.asarray(intenT,dtype=float))
+                ginten.append(np.asarray(intenG,dtype=float))
                 
                 
     number=np.arange(1,len(xcentrall)+1)
@@ -132,7 +132,9 @@ def main():
     print(x)
     
                 
+    
     data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
+   
     df = pd.DataFrame(data=data)
     print(df)
     
@@ -143,7 +145,7 @@ def main():
 
     #df.to_excel(pathsave, index=False ,encoding='utf-8', engine='xlsxwriter')
     pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.csv")
-    df.to_csv(pathsave, index=False,encoding='utf-8')
+    df.to_csv(pathsave, index=False,encoding='utf-8',sep=';')
     print("writing complete")
     
 if __name__ == "__main__":

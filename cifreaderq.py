@@ -6,7 +6,7 @@ import ctypes
 def cifreader(f):
     if os.path.splitext(f)[1]==".cif":
         cluster_count=np.fromfile(f,count=4,offset=9,dtype=ctypes.c_ulong)#ctypes.c_uint
-        print(cluster_count)
+        #print(cluster_count)
         #print(type(cluster_count))
         #print(cluster_count.shape)
         #print()
@@ -30,6 +30,7 @@ def cifreader(f):
         intensitivityT=np.resize(intensitivityT,intensitivityT.size)
         intensitivityC=np.resize(intensitivityC,intensitivityC.size)
         intensitivityG=np.resize(intensitivityG,intensitivityG.size)
+        #print(intensitivityT.shape)
 
         
     
