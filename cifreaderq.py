@@ -2,6 +2,8 @@ import os
 import numpy as np
 import ctypes
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 
 
 def cifreader(f):
@@ -30,31 +32,26 @@ def cifreader(f):
         intensitivityG=np.resize(intensitivityG,intensitivityG.size)
         intensitivityT=np.resize(intensitivityT,intensitivityT.size)
         #print(intensitivityA.shape)
-
-        plt.figure('intensitivityA',figsize=(15,7))
-        plt.hist(intensitivityA,bins=50,density=True,stacked=True, facecolor='r',histtype= 'bar',edgecolor='k',linewidth=2, alpha=0.75)
+        d={'intensitivityA':intensitivityA,'intensitivityG':intensitivityG,'intensitivityC':intensitivityC,'intensitivityT':intensitivityT}
+        df = pd.DataFrame(data=d)
+        plt.figure('Boxplot',figsize=(15,7))    
+        sns.boxplot(df)
         plt.grid(True)
         plt.tick_params(labelsize =20,#  Размер подписи
                     color = 'k')   #  Цвет делений
         
 
-        plt.figure('intensitivityC',figsize=(15,7))
-        plt.hist(intensitivityC,bins=50,density=True,stacked=True, facecolor='r',histtype= 'bar',edgecolor='k',linewidth=2, alpha=0.75)
+        plt.figure('Violinplot',figsize=(15,7))    
+        sns.violinplot(df)
         plt.grid(True)
         plt.tick_params(labelsize =20,#  Размер подписи
                     color = 'k')   #  Цвет делений
         
-        plt.figure('intensitivityG',figsize=(15,7))
-        plt.hist(intensitivityG,bins=50,density=True,stacked=True, facecolor='r',histtype= 'bar',edgecolor='k',linewidth=2, alpha=0.75)
-        plt.grid(True)
-        plt.tick_params(labelsize =20,#  Размер подписи
-                    color = 'k')   #  Цвет делений
-        
-        plt.figure('intensitivityT',figsize=(15,7))
-        plt.hist(intensitivityT,bins=50,density=True,stacked=True, facecolor='r',histtype= 'bar',edgecolor='k',linewidth=2, alpha=0.75)
-        plt.grid(True)
-        plt.tick_params(labelsize =20,#  Размер подписи
-                    color = 'k')   #  Цвет делений
+        #plt.figure('Histplot',figsize=(15,7))  
+        #sns.histplot(df)
+        #plt.grid(True)
+        #plt.tick_params(labelsize =20,#  Размер подписи
+                    #color = 'k')   #  Цвет делений
         
        
         #print(intensitivityA.max())
@@ -67,9 +64,13 @@ def cifreader(f):
         plt.show()
         return np.sum(intensitivityA),np.sum(intensitivityC),np.sum(intensitivityG),np.sum(intensitivityT),cluster_count
         
+       
+        
+        
+        
         
 
 
-if __name__ == '__main__':
-    #cifreader("C:/Users/evgen/Downloads/DNATOOOLS/files/s_1_1101.cif")
-    sumintenA,sumintenC,sumintenG,sumintenT,quantitycluster=cifreader("C:/Users/Евгений/Downloads/s_1_1101.cif")
+#if __name__ == '__main__':
+    #intenA,intenC,intenG,intenT,quantitycluster=cifreader("C:/Users/evgen/Downloads/DNATOOOLS/files/s_1_1101.cif")
+    #sumintenA,sumintenC,sumintenG,sumintenT,quantitycluster=cifreader("C:/Users/Евгений/Downloads/s_1_1101.cif")
