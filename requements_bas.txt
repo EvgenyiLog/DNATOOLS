@@ -6,3 +6,5 @@ colorama
 XlsxWriter
 gemmi
 opencv-python
+scikit-learn
+

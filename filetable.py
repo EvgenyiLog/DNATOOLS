@@ -46,6 +46,7 @@ def readerbcl(f):
         base,qual=next(x)
         #print(base)
         #print(qual)
+        qual=-33
         return base,qual
 
 
