@@ -62,7 +62,7 @@ def cifreader(f):
         #print(intensitivityT.sum())
         print()
         plt.show()
-        return np.sum(intensitivityA),np.sum(intensitivityC),np.sum(intensitivityG),np.sum(intensitivityT),cluster_count
+        return intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count
         
        
         
