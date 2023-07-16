@@ -30,6 +30,13 @@ def locsreader(f):
 
 
 def cropimage(filename1,filename2,width, height, angle):
+    #print(filename2)
+    words = filename2.split("/")
+    f=words[-1] 
+    f2=f.split(".")
+    #print(f2)
+    f3=f2[0]
+    print(f3)
     xcentr,ycentr=locsreader(filename1)
     image=tiffreader(filename2)
     xcentr=np.asarray(xcentr,dtype=float)
@@ -51,9 +58,9 @@ def cropimage(filename1,filename2,width, height, angle):
             #print(box)
             #print(box[1][0])
             imagecrop=image[box[1][0]:box[2][0],box[2][1]:box[3][1]]
-            filename=i
+            filename=''.join([str(i), str(f3)]) 
             save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/"
-            filepath=os.path.join(save_dir, str(filename))
+            filepath=os.path.join(save_dir, filename)
             filepath=os.path.splitext(os.path.abspath(filepath))[0]+".jpg"
             print(filepath)
             cv2.imwrite(filepath,imagecrop)
