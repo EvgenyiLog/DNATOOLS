@@ -36,7 +36,7 @@ def cropimage(filename1,filename2,width, height, angle):
     f2=f.split(".")
     #print(f2)
     f3=f2[0]
-    print(f3)
+    #print(f3)
     xcentr,ycentr=locsreader(filename1)
     image=tiffreader(filename2)
     xcentr=np.asarray(xcentr,dtype=float)
@@ -62,7 +62,11 @@ def cropimage(filename1,filename2,width, height, angle):
             save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/"
             filepath=os.path.join(save_dir, filename)
             filepath=os.path.splitext(os.path.abspath(filepath))[0]+".jpg"
-            print(filepath)
+            #print(filepath)
+            imagecrop=np.asarray(imagecrop,dtype=np.uint16)
+            print()
+            #print(imagecrop.shape)
+            imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
             cv2.imwrite(filepath,imagecrop)
         else:
             rect=((xcentr[i],ycentr[i]),(width, height), angle)
@@ -71,11 +75,15 @@ def cropimage(filename1,filename2,width, height, angle):
             #print(box)
             #print(box[1][0])
             imagecrop=image[box[1][0]:box[2][0],0:10]
-            filename=i
+            filename=''.join([str(i), str(f3)]) 
             save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/"
             filepath=os.path.join(save_dir, str(filename))
             filepath=os.path.splitext(os.path.abspath(filepath))[0]+".jpg"
-            print(filepath)
+            #print(filepath)
+            imagecrop=np.asarray(imagecrop,dtype=np.uint8)
+            print()
+            #print(imagecrop.shape)
+            imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
             cv2.imwrite(filepath,imagecrop)
             
 
