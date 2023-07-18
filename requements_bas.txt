@@ -7,4 +7,5 @@ XlsxWriter
 gemmi
 opencv-python
 scikit-learn
-
+seaborn
+matplotlib
