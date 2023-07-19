@@ -13,7 +13,7 @@ def readerbcl(f):
         base,qual=next(x)
         #print(base)
         #print(qual)
-        qual=-33
+        qual=np.subtract(qual,33)
         return base,qual
 
 def bclconverter(f):
