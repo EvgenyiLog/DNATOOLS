@@ -7,9 +7,6 @@ XlsxWriter
 gemmi
 opencv-python
 scikit-learn
-dtaidistance
-pyclustering
 seaborn
 matplotlib
-
-
+mahotas
