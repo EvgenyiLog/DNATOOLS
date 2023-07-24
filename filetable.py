@@ -46,7 +46,7 @@ def readerbcl(f):
         base,qual=next(x)
         #print(base)
         #print(qual)
-        qual=qual-33
+        qual=np.subtract(qual,33)
         return base,qual
 
 
@@ -137,6 +137,7 @@ def main():
     data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
    
     df = pd.DataFrame(data=data)
+    #df=df.pivot(columns=['number','xcentr','ycentr','quality','quantity','base','A','T','C','G'])
     print(df)
     
     pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.xlsx")
