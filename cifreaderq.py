@@ -13,9 +13,13 @@ def cifreader(f):
         #print(type(cluster_count))
         #print(cluster_count.shape)
         print()
-        precision=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_uint32)
+        precision=np.fromfile(f,count=1,offset=4,dtype=ctypes.c_uint)
         print(precision)
-        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_uint32)#ctypes.c_uint
+        cycle=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
+        print(cycle)
+        c=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
+        print(c)
+        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_uint16)#ctypes.c_uint
         #print(intensitivity)
         #print(type(intensitivity))
         
