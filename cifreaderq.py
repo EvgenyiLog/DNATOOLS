@@ -19,7 +19,7 @@ def cifreader(f):
         print(cycle)
         c=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
         print(c)
-        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_uint16)#ctypes.c_uint
+        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_int16)#ctypes.c_uint
         #print(intensitivity)
         #print(type(intensitivity))
         
