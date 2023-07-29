@@ -164,7 +164,7 @@ def main():
     
     #data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
    
-    data={'number':number,'xcentr':xcentrallnew,'ycentr':ycentrallnew,'quality':quality,'quantity':quantity,'base':basef,'A':aintennew,'T':tintennew,'C':cintennew,'G':gintennew}
+    data={'number':number,'xcentr':xcentrallnew,'ycentr':ycentrallnew,'quality':quality,'quantity':quantity,'base':basef,'A':aintennew,'C':cintennew,'G':gintennew,'T':tintennew}
    
 
     df = pd.DataFrame(data=data)

@@ -46,7 +46,7 @@ def converter(f1,f2,f3):
     #qual=qual+[0]*(maxlen - len(qual))
     #qual=qual+a[len(a):]
     #base=base+a[len(a):]
-    d={'base':base,'quality':qual,'xcentr':xcentr,'ycentr':ycentr,'intensitivityA':intensitivityA[:len(xcentr)],'intensitivityG':intensitivityG[:len(ycentr)],'intensitivityC':intensitivityC[:len(ycentr)],'intensitivityT':intensitivityT[:len(xcentr)]}
+    d={'base':base,'quality':qual,'xcentr':xcentr,'ycentr':ycentr,'intensitivityA':intensitivityA[:len(xcentr)],'intensitivityC':intensitivityC[:len(ycentr)],'intensitivityG':intensitivityG[:len(ycentr)],'intensitivityT':intensitivityT[:len(xcentr)]}
     #d={'xcentr':xcentr,'ycentr':ycentr,'intensitivityA':intensitivityA,'intensitivityG':intensitivityG,'intensitivityC':intensitivityC,'intensitivityT':intensitivityT}
     
     df = pd.DataFrame(data=d)

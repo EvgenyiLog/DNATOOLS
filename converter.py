@@ -8,7 +8,7 @@ from cifreaderq import cifreader
 
 def converter(f):
     intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count=cifreader(f)
-    d={'intensitivityA':intensitivityA,'intensitivityG':intensitivityG,'intensitivityC':intensitivityC,'intensitivityT':intensitivityT}
+    d={'intensitivityA':intensitivityA,'intensitivityC':intensitivityC,'intensitivityG':intensitivityG,'intensitivityT':intensitivityT}
     df = pd.DataFrame(data=d)
     pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/cif.xlsx")
     writer = pd.ExcelWriter(pathsave, engine='xlsxwriter')
