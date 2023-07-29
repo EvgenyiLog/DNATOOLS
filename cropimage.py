@@ -66,7 +66,7 @@ def cropimage(filename1,filename2,width, height, angle):
             imagecrop=np.asarray(imagecrop,dtype=np.uint16)
             print()
             #print(imagecrop.shape)
-            imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
+            #imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
             cv2.imwrite(filepath,imagecrop)
         else:
             rect=((xcentr[i],ycentr[i]),(width, height), angle)
@@ -83,7 +83,7 @@ def cropimage(filename1,filename2,width, height, angle):
             imagecrop=np.asarray(imagecrop,dtype=np.uint8)
             print()
             #print(imagecrop.shape)
-            imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
+            #imagecrop=cv2.cvtColor(imagecrop, cv2.COLOR_GRAY2RGB)
             cv2.imwrite(filepath,imagecrop)
             
 
