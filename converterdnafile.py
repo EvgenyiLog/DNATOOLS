@@ -29,36 +29,31 @@ def readerbcl(f):
         return base,qual
     
 
-def converter(f1,f2,f3):
+def converter(f1,f2,f3,filename='dnafile.xlsx',save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/",savecsv=True,savexlsx=True):
     base,qual=readerbcl(f1)
     xcentr,ycentr=locsreader(f2)
-    intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count=cifreader(f3)
-    l1=len(intensitivityA)
-    l2=len(intensitivityC)
-    l3=len(intensitivityT)
-    l4=len(intensitivityG)
-    i=np.asarray([l1,l2,l3,l4])
-    #print(i)
-    maxlen=np.amax(i)
-    a=np.zeros_like(intensitivityA)
-    #print(maxlen)
-    #base=base+[0]*(maxlen - len(base))
-    #qual=qual+[0]*(maxlen - len(qual))
-    #qual=qual+a[len(a):]
-    #base=base+a[len(a):]
+    intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count,cycle=cifreader(f3)
+    
     d={'base':base,'quality':qual,'xcentr':xcentr,'ycentr':ycentr,'intensitivityA':intensitivityA[:len(xcentr)],'intensitivityC':intensitivityC[:len(ycentr)],'intensitivityG':intensitivityG[:len(ycentr)],'intensitivityT':intensitivityT[:len(xcentr)]}
     #d={'xcentr':xcentr,'ycentr':ycentr,'intensitivityA':intensitivityA,'intensitivityG':intensitivityG,'intensitivityC':intensitivityC,'intensitivityT':intensitivityT}
     
     df = pd.DataFrame(data=d)
-    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/dnafile.xlsx")
-    writer = pd.ExcelWriter(pathsave, engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='Sheet1')
-    writer.close()
-
-    #df.to_excel(pathsave, index=False ,encoding='utf-8', engine='xlsxwriter')
-    pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/dnafile.csv")
-    df.to_csv(pathsave, index=False,encoding='utf-8',sep=';')
-    print("writing complete")
+    if savexlsx:
+        #pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/dnafile.xlsx")
+        pathsave=os.path.join(save_dir, filename)
+        pathsave=os.path.splitext(os.path.abspath(pathsave))[0]+".xlsx"
+        writer = pd.ExcelWriter(pathsave, engine='xlsxwriter')
+        df.to_excel(writer, sheet_name='Sheet1')
+        writer.close()
+        #df.to_excel(pathsave, index=False ,encoding='utf-8', engine='xlsxwriter')
+        print("writing complete")
+    
+    if savecsv:
+        #pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/dnafile.csv")
+        pathsave=os.path.join(save_dir, filename)
+        pathsave=os.path.splitext(os.path.abspath(pathsave))[0]+".csv"
+        df.to_csv(pathsave, index=False,encoding='utf-8',sep=';')
+        print("writing complete")
 
 
 def main():

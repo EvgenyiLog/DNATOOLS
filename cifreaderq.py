@@ -13,7 +13,7 @@ def cifreader(f):
         #print(type(cluster_count))
         #print(cluster_count.shape)
         print()
-        precision=np.fromfile(f,count=1,offset=4,dtype=ctypes.c_uint)
+        precision=np.fromfile(f,count=1,offset=4,dtype=ctypes.c_int8)
         print(precision)
         cycle=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
         print(cycle)
@@ -68,7 +68,7 @@ def cifreader(f):
         #print(intensitivityT.sum())
         print()
         plt.show()
-        return intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count
+        return intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count,cycle
         
        
         
