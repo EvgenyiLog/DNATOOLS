@@ -15,3 +15,5 @@ def tiffreader(path):
     #print(image.shape)
     print(image.dtype)
     return image
+
+

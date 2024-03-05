@@ -46,7 +46,7 @@ def readerbcl(f):
         base,qual=next(x)
         #print(base)
         #print(qual)
-        qual=qual-33
+        qual=np.subtract(qual,33)
         return base,qual
 
 
@@ -117,15 +117,43 @@ def main():
                 
     number=np.arange(1,len(xcentrall)+1)
     #print(number)
-              
+    xcentrallnew=[]
+    ycentrallnew=[]
+    aintennew=[]
+    cintennew=[]
+    gintennew=[]
+    tintennew=[]
+    for count, value in enumerate(xcentrall):
+        xcentrallnew.append(value)    
+
+    for count, value in enumerate(ycentrall):
+        ycentrallnew.append(value) 
+
+    for count, value in enumerate(ainten):
+        aintennew.append(value)    
+
+    for count, value in enumerate(cinten):
+        cintennew.append(value)  
+
+    for count, value in enumerate(tinten):
+        tintennew.append(value)    
+
+    for count, value in enumerate(ginten):
+        gintennew.append(value)  
     x=PrettyTable()
     x.add_column('number',number)
-    x.add_column('xcentr',xcentrall)
-    x.add_column('ycentr',ycentrall)
-    x.add_column('A',ainten)
-    x.add_column('G',ginten)
-    x.add_column('C',cinten)
-    x.add_column('T',tinten)
+    x.add_column('xcentr',xcentrallnew)
+    x.add_column('ycentr',ycentrallnew)
+    x.add_column('A',aintennew)
+    x.add_column('G',gintennew)
+    x.add_column('C',cintennew)
+    x.add_column('T',tintennew)
+    #x.add_column('xcentr',xcentrall)
+    #x.add_column('ycentr',ycentrall)
+    #x.add_column('A',ainten)
+    #x.add_column('G',ginten)
+    #x.add_column('C',cinten)
+    #x.add_column('T',tinten)
     x.add_column('quantity',quantity)
     x.add_column('quality',quality)
     x.add_column('base',basef)
@@ -134,9 +162,13 @@ def main():
     
                 
     
-    data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
+    #data={'number':number,'xcentr':xcentrall,'ycentr':ycentrall,'quality':quality,'quantity':quantity,'base':basef,'A':ainten,'T':tinten,'C':cinten,'G':ginten}
    
+    data={'number':number,'xcentr':xcentrallnew,'ycentr':ycentrallnew,'quality':quality,'quantity':quantity,'base':basef,'A':aintennew,'C':cintennew,'G':gintennew,'T':tintennew}
+   
+
     df = pd.DataFrame(data=data)
+    #df=df.pivot(columns=['number','xcentr','ycentr','quality','quantity','base','A','T','C','G'])
     print(df)
     
     pathsave=os.path.abspath("C:/Users/evgen/Downloads/DNATOOOLS/result/result.xlsx")

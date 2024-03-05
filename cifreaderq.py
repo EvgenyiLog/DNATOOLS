@@ -9,11 +9,17 @@ import seaborn as sns
 def cifreader(f):
     if os.path.splitext(f)[1]==".cif":
         cluster_count=np.fromfile(f,count=4,offset=9,dtype=ctypes.c_uint32)#ctypes.c_uint
-        #print(cluster_count)
+        print(cluster_count)
         #print(type(cluster_count))
         #print(cluster_count.shape)
         print()
-        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_uint16)#ctypes.c_uint
+        precision=np.fromfile(f,count=1,offset=4,dtype=ctypes.c_int8)
+        print(precision)
+        cycle=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
+        print(cycle)
+        c=np.fromfile(f,count=1,offset=5,dtype=ctypes.c_ushort)
+        print(c)
+        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_int16)#ctypes.c_uint
         #print(intensitivity)
         #print(type(intensitivity))
         
@@ -23,10 +29,10 @@ def cifreader(f):
         #print(intensitivity.shape)
         #print(intensitivity.size)
         intensitivityA,intensitivityC,intensitivityG,intensitivityT=np.hsplit(intensitivity, 4)
-        intensitivityA=np.divide(intensitivityA,cluster_count[0])
-        intensitivityC=np.divide(intensitivityC,cluster_count[1])
-        intensitivityG=np.divide(intensitivityG,cluster_count[2])
-        intensitivityT=np.divide(intensitivityT,cluster_count[2])
+        #intensitivityA=np.divide(intensitivityA,cluster_count[0])
+        #intensitivityC=np.divide(intensitivityC,cluster_count[1])
+        #intensitivityG=np.divide(intensitivityG,cluster_count[2])
+        #intensitivityT=np.divide(intensitivityT,cluster_count[2])
         intensitivityA=np.resize(intensitivityA,intensitivityA.size)
         intensitivityC=np.resize(intensitivityC,intensitivityC.size)
         intensitivityG=np.resize(intensitivityG,intensitivityG.size)
@@ -62,7 +68,7 @@ def cifreader(f):
         #print(intensitivityT.sum())
         print()
         plt.show()
-        return intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count
+        return intensitivityA,intensitivityC,intensitivityG,intensitivityT,cluster_count,cycle
         
        
         
