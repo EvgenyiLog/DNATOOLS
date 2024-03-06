@@ -53,12 +53,14 @@ def cropimage(filename1,filename2,width, height, angle):
         #print()
         #print(ycentr[i])
         if ycentr[i]>10:
+            print('1')
             rect=((xcentr[i],ycentr[i]),(width, height), angle)
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             #print(box)
             #print(box[1][0])
             imagecrop=image[box[1][0]:box[2][0],box[2][1]:box[3][1]]
+            #imagecrop=image[int(xcentr[i])-width//2+1:int(xcentr[i])+width//2+1,int(ycentr[i])-height//2+1:int(xcentr[i])+height//2+1]
             filename=''.join([str(i), str(f3)]) 
             save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/"
             filepath=os.path.join(save_dir, filename)
@@ -71,12 +73,15 @@ def cropimage(filename1,filename2,width, height, angle):
             imagecrop=cv2.normalize(imagecrop,None,0,255,cv2.NORM_MINMAX, dtype=cv2.CV_8U)
             cv2.imwrite(filepath,imagecrop)
         else:
+            print('2')
             rect=((xcentr[i],ycentr[i]),(width, height), angle)
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             #print(box)
             #print(box[1][0])
             imagecrop=image[box[1][0]:box[2][0],0:10]
+            #imagecrop=image[int(xcentr[i])-width//2+1:int(xcentr[i])+width//2+1,int(ycentr[i])-height//2+1:int(xcentr[i])+height//2+1]
+            
             filename=''.join([str(i), str(f3)]) 
             save_dir="C:/Users/evgen/Downloads/DNATOOOLS/result/"
             filepath=os.path.join(save_dir, str(filename))
