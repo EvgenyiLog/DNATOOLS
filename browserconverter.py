@@ -100,7 +100,7 @@ class App():
             filename=self.filename.get(),
             savecsv=self.use_save_csv.get(),
             savexlsx=self.use_save_xlsx.get(),
-            save_dir=savedir,
+            save_dir=self.savedir.get(),
             
         )
         bar = Bar('Processing', max=20)

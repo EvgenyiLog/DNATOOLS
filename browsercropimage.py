@@ -102,7 +102,7 @@ class App():
             angle=self.angle.get(),
             
             
-            save_dir=savedir,
+            save_dir=self.savedir.get(),
             
         )
         bar = Bar('Processing', max=20)
